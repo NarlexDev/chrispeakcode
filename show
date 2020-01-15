@@ -1,0 +1,44 @@
+#include <stdlib.h>
+#include <stdio.h>
+#include <unistd.h>
+
+
+void how_many_words(char *str)
+{
+    int i;
+    int j;
+
+    i = 0;
+    j = 0;
+    while(str[i] != 0)
+    {
+        if(str[i] = 32)
+        {
+            j++;
+        }
+            if(str[i] = 9)
+            {
+                j++;
+            }
+                if(str[i] = 10)
+                {
+                    j++;
+                }
+            
+        i++;
+        printf("%d /n", i);
+    }
+    
+    printf("%d /n", j);
+    
+}
+
+int main ()
+{
+    char *str;
+
+    str = "gterhgtrshg";
+    how_many_words(str);
+    return(0);
+
+}
