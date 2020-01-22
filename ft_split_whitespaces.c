@@ -30,15 +30,14 @@ int word_size(char *str)
 {
     int i;
     int j;
-
+    printf("%d \n", *str);
     i = 0;
-    
-    while((test_alpha(str[i]) == 1))
+    while(str[i] != ' ' && str[i] != '\n' && str[i] != '\t' && str[i] != '\0')
     {    
         i++;
-        printf("%d \n", j);
     }
-    return (i);
+    printf("%d \n", i);
+    return (i); 
 }
 
 char *ft_strcpy(char *dest, char *str)
@@ -52,48 +51,55 @@ char *ft_strcpy(char *dest, char *str)
         i++;
         
     }
-    
-    return (dest);
+     return (dest);
 }
 
 char **ft_split_whitespaces(char *str)
 {   
-    
+    int strlen;
+    int word_count;
+    int word_print;
     int i;
     int j;
     int k;
     char *word;
     char **words;
 
+    word_print = 0;
     k = 0;
     i = 0;
     j = 0;
+    strlen = 0;
+    word_count = how_many_words(str);
+    words = (char**)malloc(sizeof(char*) * (word_count + 1));
     
-    words = (char**)malloc(sizeof(char) * (how_many_words(str) + 1));
-    words[how_many_words(str) + 1] = 0;
-    printf("%d \n", *words);
-    
-    while(str[i] != 0)
+    while(word_print < word_count)
     {
-        while(test_alpha(str[i]) == 1)
+        strlen = word_size(&(str[i]));
+        if((test_alpha(str[i]) == 1))
         {
-            word = (char*)malloc(sizeof(char) * (word_size(str) + 1));
-            while( k++ < (word_size(str) + 1)) 
+            printf("a");
+            strlen = word_size(&(str[i]));
+            word = (char*)malloc(sizeof(char) * (strlen + 1));
+            while( k++ < (strlen + 1)) 
             {   
                 word[j] = 0; 
             }    
             words[j] = ft_strcpy(word, str);
-            i++;  
-        }  
-        i++;
-    }
+            j++; 
+            i += strlen;
+        }
+        if((test_alpha(str[i]) == 0))
+            i++;
+        word_print++;    
+    }            
 }
 
 int main ()
 {
     char *str;
 
-    str = "vrevr greger regerqg greq";
+    str = "hjkk regerqg greq";
     ft_split_whitespaces(str);
     return(0);
 }
