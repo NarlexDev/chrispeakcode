@@ -23,48 +23,68 @@ int how_many_words(char *str)
             j++;
         i++;
     }
-    printf("%d \n", j);
     return j; 
 }
-char *creation_tableau(int a)
+
+int word_size(char *str)
 {
-    char *tab;
+    int i;
+    int j;
+
+    i = 0;
+    
+    while((test_alpha(str[i]) == 1))
+    {    
+        i++;
+        printf("%d \n", j);
+    }
+    return (i);
+}
+
+char *ft_strcpy(char *dest, char *str)
+{
     int i;
 
     i = 0;
-    tab = (char*)malloc(sizeof(char) * (a + 1));
-
-    while(i < a + 1)
+    while(test_alpha(str[i]) != 0)
     {
-        tab[i] = 0;
+        dest[i] = str[i];
         i++;
-        printf("%s \n", *tab);
+        
     }
-    return tab;
-
+    
+    return (dest);
 }
 
 char **ft_split_whitespaces(char *str)
 {   
-    int wordcount;
+    
     int i;
     int j;
-    char *tab;
+    int k;
+    char *word;
+    char **words;
 
-    wordcount = how_many_words(str);
-    tab = creation_tableau(wordcount);
-    
+    k = 0;
     i = 0;
     j = 0;
+    
+    words = (char**)malloc(sizeof(char) * (how_many_words(str) + 1));
+    words[how_many_words(str) + 1] = 0;
+    printf("%d \n", *words);
+    
     while(str[i] != 0)
     {
-       while((test_alpha(str[i]) == 1))
+        while(test_alpha(str[i]) == 1)
         {
-            tab[j] = str[i];
-            printf("%d \n", tab);
-            i++;
-            j++;
-        }
+            word = (char*)malloc(sizeof(char) * (word_size(str) + 1));
+            while( k++ < (word_size(str) + 1)) 
+            {   
+                word[j] = 0; 
+            }    
+            words[j] = ft_strcpy(word, str);
+            i++;  
+        }  
         i++;
     }
 }
