@@ -1,56 +1,50 @@
 #include <unistd.h>
 #include <stdio.h>
-
-int dmillier(unsigned int nb)
+int puissance(int a, int exp)
 {
-    nb = nb / 10000;
-    nb = 48 + nb % 10;
-    write(1,&nb,1);
-}
+    int j;
 
-int millier(unsigned int nb)
+    j = a;
+    while(exp > 0)
+    {
+        if(exp == 1)
+            return (a);
+        a = a * j;
+        exp--;
+    }
+    return (a);
+}
+void divpardix(unsigned int nb, int i)
 {
-    nb = nb / 1000;
+    nb = nb / (puissance(10,i));
     nb = 48 + nb % 10;
-    write(1,&nb,1);
+    write(1,&nb,1); 
 }
-
-int centaine(unsigned int nb)
-{
-    nb = nb / 100;
-    nb = 48 + nb % 10;
-    write(1,&nb,1);
-}
-
-int dizaine(unsigned int nb)
-{
-    nb = nb / 10;
-    nb = 48 + nb % 10;
-    write(1,&nb,1);
-}
-
 void ft_putnbr(int nb)
 {
+    int i;
+
+    i = 1;
     if(nb < 0)
-    {    nb = nb + (-2 * nb);
+    {   
+        nb = -nb; 
         write(1,"-",1);
     }    
-    if(nb > 9999)
-        dmillier(nb);
-    if(nb > 999)
-        millier(nb);
-    if(nb > 99)
-        centaine(nb);
-    if(nb > 9)   
-        dizaine(nb); 
-
+    while((nb - puissance(10,i)) > 0)
+    {
+        i++;
+    }
+    i--;
+    while(i > 0)
+    {
+        
+        divpardix(nb,i);
+        i--;
+    }
     nb = nb % 10 + 48;
     write(1,&nb,1);   
 }
-
-
-
 int main()
 {
-    ft_putnbr(-15545);   
+    ft_putnbr(-12745227);   
 }
